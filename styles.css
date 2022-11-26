@@ -1,0 +1,16 @@
+#city {
+  text-transform: capitalize;
+}
+
+.block {
+  display: block;
+}
+
+.fs-big {
+  font-size: 60px;
+}
+
+.system {
+  text-decoration: none;
+  font-weight: 600;
+}
