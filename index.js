@@ -11,7 +11,7 @@ function search(event) {
   event.preventDefault();
   let input = document.querySelector("#cityinput");
   let cityValue = input.value.trim().toLowerCase();
-  let cityRequestURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`;
+  let cityRequestURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`;
   axios.get(cityRequestURL).then(handleCitySearch);
 }
 
@@ -23,7 +23,7 @@ function handleCurrentSearch(response) {
   let lat = response.coords.latitude;
   let lon = response.coords.longitude;
 
-  let url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  let url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
   axios.get(url).then(function (locationResponse) {
     let name = locationResponse.data[0].name;
