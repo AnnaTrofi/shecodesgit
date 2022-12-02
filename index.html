@@ -27,13 +27,31 @@
             <div class="col-4">
               <div class="row block">
                 <span id="temperature" class="fs-big">25</span>
-                <h3 id="systemC" class="system">C</h3>
+                <a href="" id="systemC" class="system active">°C</a>
+                |
+                <a href="" id="systemF" class="system">°F</a>
               </div>
+              <img
+                src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+                id="icon"
+                class="img-fluid"
+              />
+              <h4 id="description" class="fs-6 fw-normal"></h4>
               <div class="row">
                 <h2 id="city" class="fs-3">Braga</h2>
               </div>
               <div class="row">
                 <h4 id="showDate" class="fs-6 fw-normal">Sunday, 20:00</h4>
+              </div>
+              <div class="row">
+                <h4 class="fs-6 fw-normal">
+                  Wind: <span id="showWind">10</span>km/h
+                </h4>
+              </div>
+              <div class="row">
+                <h4 class="fs-6 fw-normal">
+                  Humidity: <span id="showHumidity">10</span>%
+                </h4>
               </div>
             </div>
           </div>
@@ -53,14 +71,6 @@
                 id="button-addon2"
               >
                 Search
-              </button>
-
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                id="current-button"
-              >
-                Current
               </button>
             </form>
           </div>

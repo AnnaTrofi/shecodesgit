@@ -12,9 +12,30 @@
 
 .system {
   text-decoration: none;
-  font-weight: 600;
 }
 
 #systemC {
   display: inline;
+}
+
+a {
+  color: black;
+  font-weight: 400;
+}
+
+a:hover {
+  color: black;
+  font-weight: 400;
+}
+
+.active {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+.active:hover {
+  cursor: default;
+  color: black;
+  font-weight: 600;
 }
