@@ -12,17 +12,17 @@ function capitalFirstLetter(string) {
 function handleCurrentTemp(response) {
   let lat = response.coords.latitude;
   let lon = response.coords.longitude;
-  let url = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+  let url = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
 
   axios.get(url).then(function (locationResponse) {
     let name = locationResponse.data.city;
     let country = locationResponse.data.country;
-    let temperature = locationResponse.data.daily[0].temperature.day;
-    let humidity = locationResponse.data.daily[0].temperature.humidity;
-    let wind = locationResponse.data.daily[0].wind.speed;
-    let image = locationResponse.data.daily[0].condition.icon_url;
-    let description = locationResponse.data.daily[0].condition.description;
-
+    let temperature = locationResponse.data.temperature.current;
+    let humidity = locationResponse.data.temperature.humidity;
+    let wind = locationResponse.data.wind.speed;
+    let image = locationResponse.data.condition.icon_url;
+    let description = locationResponse.data.condition.description;
+    let coordinates = response.coords;
     celsiusTemperature = temperature;
 
     document.querySelector("#city").innerHTML = `${name}, ${country}`;
@@ -32,6 +32,7 @@ function handleCurrentTemp(response) {
     document.querySelector("#icon").src = image;
     document.querySelector("#description").innerHTML =
       capitalFirstLetter(description);
+    getForecast(coordinates);
   });
 }
 showCurrent();
@@ -68,6 +69,7 @@ function handleCitySearch(response) {
   document.querySelector("#icon").src = image;
   document.querySelector("#description").innerHTML =
     capitalFirstLetter(description);
+  getForecast(response.data.coordinates);
 }
 
 function updateTime(timestamp) {
@@ -85,6 +87,54 @@ function updateTime(timestamp) {
   let dateElement = document.querySelector("#showDate");
   dateElement.innerHTML = `${currentDay}, ${hours}:${minutes}`;
 }
+function formatDay(time) {
+  let date = new Date(time);
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[date.getDay()];
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = "forecast";
+  console.log(response.data.daily);
+
+  let forecastHTML = `<div class="row">`;
+  response.data.daily.slice(1).forEach(function (forecastday, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="col-2">
+        <div class="weather-forecast-date">${formatDay(
+          forecastday.time * 1000
+        )}</div>
+        <img
+          src="${forecastday.condition.icon_url}"
+          alt=""
+          width="60"
+        />
+        <div class="forecast-temps">
+          <span class="forecast-temp-max">  ${Math.round(
+            forecastday.temperature.maximum
+          )}°</span>
+          <span class="forecast-temp-min"> ${Math.round(
+            forecastday.temperature.minimum
+          )}°</span>
+        </div>
+      </div>
+  `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();
@@ -92,10 +142,8 @@ function displayCelsiusTemperature(event) {
   let fahrenheitElement = document.querySelector("#systemF");
   let celsiusElement = document.querySelector("#systemC");
 
-  // remove the active class from Celsius
   celsiusElement.classList.add("active");
 
-  // add the active class to fahrenheit
   fahrenheitElement.classList.remove("active");
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
@@ -108,10 +156,8 @@ function displayFahrenheitTemperature(event) {
   let fahrenheitElement = document.querySelector("#systemF");
   let celsiusElement = document.querySelector("#systemC");
 
-  // remove the active class from Celsius
   celsiusElement.classList.remove("active");
 
-  // add the active class to fahrenheit
   fahrenheitElement.classList.add("active");
 
   let temperatureElement = document.querySelector("#temperature");

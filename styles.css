@@ -39,3 +39,41 @@ a:hover {
   color: black;
   font-weight: 600;
 }
+
+.temperature .active {
+  color: rgb(33, 33, 33);
+  cursor: default;
+}
+
+.temperature .active:hover {
+  text-decoration: none;
+}
+
+.forecast {
+  margin-top: 4px;
+  text-align: center;
+  color: #000;
+}
+
+.forecast-date {
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+.forecast-temp-min {
+  opacity: 0.5;
+}
+
+.forecast-temps {
+  font-size: 13px;
+}
+
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
