@@ -15,78 +15,73 @@
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   </head>
   <body>
-    <div class="container-md">
+    <div class="container-md mw-720 bg-light rounded p-3 mt-2">
+      <div class="row mt-5">
+        <h2 id="city" class="fs-2">Braga</h2>
+      </div>
       <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-          <div class="row text-center">
-            <h1 class="fs-1">Anna's Weather Forecast</h1>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-4">
-              <div>
-                <span id="temperature" class="fs-big">25</span>
-                <a href="" id="systemC" class="system active">°C</a>
-                |
-                <a href="" id="systemF" class="system">°F</a>
-              </div>
-              <img
-                src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
-                id="icon"
-                class="img-fluid"
-              />
-              <h4 id="description" class="fs-6 fw-normal"></h4>
-              <div class="row">
-                <h2 id="city" class="fs-3">Braga</h2>
-              </div>
-              <div class="row">
-                <h4 id="showDate" class="fs-6 fw-normal">Sunday, 20:00</h4>
-              </div>
-              <div class="row">
-                <h4 class="fs-6 fw-normal">
-                  Wind: <span id="showWind">10</span>km/h
-                </h4>
-              </div>
-              <div class="row">
-                <h4 class="fs-6 fw-normal">
-                  Humidity: <span id="showHumidity">10</span>%
-                </h4>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <form id="form" class="input-group mb-3">
-              <input
-                id="cityinput"
-                type="text"
-                class="form-control"
-                placeholder="Enter city or Postcode"
-                aria-label="City or Postcode"
-                aria-describedby="button-addon2"
-              />
-              <button
-                class="btn btn-outline-secondary"
-                type="submit"
-                id="button-addon2"
-              >
-                Search
-              </button>
-            </form>
+        <h4 id="showDate" class="fs-6 fw-normal">Sunday, 20:00</h4>
+      </div>
+      <div class="row justify-content-between mt-4">
+        <div class="col-4">
+          <div class="row gx-0">
+            <span id="temperature" class="fs-big col-md-auto">25</span>
+            <span class="col">°C</span>
           </div>
         </div>
-        <div class="weather-forecast" id="forecast"></div>
-      </div>
+        <div class="col-3 text-end">
+          <img
+            src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+            id="icon"
+            class="center-cropped"
+          />
 
-      <div class="row text-left ms-0 me-0 mt-4">
-        <a target="_blank" href="https://github.com/AnnaTrofi/shecodesgit"
-          >Coded by Anna Trofimenko</a
-        >
+          <h4 id="description" class="fs-5 fw-normal"></h4>
+
+          <div class="row">
+            <h4 class="fs-6 fw-normal mt-2">
+              <b>Wind:</b> <span id="showWind">10</span>km/h
+            </h4>
+          </div>
+          <div class="row">
+            <h4 class="fs-6 fw-normal">
+              <b>Humidity:</b> <span id="showHumidity">10</span>%
+            </h4>
+          </div>
+        </div>
       </div>
+      <div class="row mt-4">
+        <form id="form" class="input-group mb-3">
+          <input
+            id="cityinput"
+            type="text"
+            class="form-control text-dark bg-white"
+            placeholder="Enter city or Postcode"
+            aria-label="City or Postcode"
+            aria-describedby="button-addon2"
+          />
+          <button
+            class="btn btn-outline-secondary text-light bg-primary"
+            type="submit"
+            id="button-addon2"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+      <div
+        class="row justify-content-between weather-forecast mt-4"
+        id="forecast"
+      ></div>
     </div>
-
-    <div class="col-2"></div>
-
+    <div class="container-md mw-720 text-left fs-6 fixed-bottom">
+      <a
+        class="grey"
+        target="_blank"
+        href="https://github.com/AnnaTrofi/shecodesgit"
+        >Coded by Anna Trofimenko</a
+      >
+    </div>
     <script src="index.js"></script>
   </body>
 </html>

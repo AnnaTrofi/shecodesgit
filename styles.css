@@ -7,7 +7,8 @@
 }
 
 .fs-big {
-  font-size: 60px;
+  font-size: 80px;
+  line-height: 70px;
 }
 
 .system {
@@ -32,12 +33,14 @@ a:hover {
   text-decoration: none;
   color: black;
   font-weight: 600;
+  vertical-align: sub;
 }
 
 .active:hover {
   cursor: default;
   color: black;
   font-weight: 600;
+  vertical-align: sub;
 }
 
 .temperature .active {
@@ -68,12 +71,29 @@ a:hover {
   font-size: 13px;
 }
 
-.row {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(-1 * var(--bs-gutter-y));
-  margin-right: calc(-0.5 * var(--bs-gutter-x));
-  margin-left: calc(-0.5 * var(--bs-gutter-x));
+#forecastname {
+  font-size: 16px;
+  color: grey;
+}
+.weather-forecast {
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+}
+
+.mw-720 {
+  max-width: 720px;
+}
+.center-cropped {
+  object-fit: none; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 73px;
+  width: 73px;
+}
+
+.grey {
+  color: darkgrey;
+}
+
+.city-input {
+  stroke: aquamarine;
 }

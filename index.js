@@ -99,34 +99,29 @@ function displayForecast(response) {
   forecastElement.innerHTML = "forecast";
   console.log(response.data.daily);
 
-  let forecastHTML = `<div class="row">`;
+  let forecastHTML = "";
   response.data.daily.slice(1).forEach(function (forecastday, index) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
-        `
-      <div class="col-2">
-        <div class="weather-forecast-date">${formatDay(
-          forecastday.time * 1000
-        )}</div>
-        <img
-          src="${forecastday.condition.icon_url}"
-          alt=""
-          width="60"
-        />
-        <div class="forecast-temps">
-          <span class="forecast-temp-max">  ${Math.round(
-            forecastday.temperature.maximum
-          )}°</span>
-          <span class="forecast-temp-min"> ${Math.round(
-            forecastday.temperature.minimum
-          )}°</span>
-        </div>
-      </div>
-  `;
+        `<div class="card border-light  text-bg-light" style="width: 7rem;">
+    <img src="${forecastday.condition.icon_url}" class="card-img-top" alt="${
+          forecastday.condition.description
+        }">
+    <div class="card-body text-center">
+      <h5 class="card-title">${formatDay(forecastday.time * 1000)}</h5>
+      <p class="card-text forecast-temps">
+        <span class="forecast-temp-max"> 
+          ${Math.round(forecastday.temperature.maximum)}°
+        </span>
+        <span class="forecast-temp-min"> 
+          ${Math.round(forecastday.temperature.minimum)}°
+        </span>
+      </p>
+    </div>
+  </div>`;
     }
   });
-  forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
@@ -135,37 +130,3 @@ function getForecast(coordinates) {
 
   axios.get(apiUrl).then(displayForecast);
 }
-
-function displayCelsiusTemperature(event) {
-  event.preventDefault();
-
-  let fahrenheitElement = document.querySelector("#systemF");
-  let celsiusElement = document.querySelector("#systemC");
-
-  celsiusElement.classList.add("active");
-
-  fahrenheitElement.classList.remove("active");
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-function displayFahrenheitTemperature(event) {
-  event.preventDefault();
-  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
-
-  let fahrenheitElement = document.querySelector("#systemF");
-  let celsiusElement = document.querySelector("#systemC");
-
-  celsiusElement.classList.remove("active");
-
-  fahrenheitElement.classList.add("active");
-
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
-}
-
-let fahrenheitLink = document.querySelector("#systemF");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
-
-let celsiusLink = document.querySelector("#systemC");
-celsiusLink.addEventListener("click", displayCelsiusTemperature);
